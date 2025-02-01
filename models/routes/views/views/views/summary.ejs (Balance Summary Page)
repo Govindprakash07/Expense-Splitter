@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Summary</title>
+</head>
+<body>
+    <h1>Expense Summary</h1>
+    <ul>
+        <% Object.keys(balances).forEach(person => { %>
+            <li><%= person %> owes: $<%= balances[person].toFixed(2) %></li>
+        <% }); %>
+    </ul>
+    <a href="/">⬅️ Back to Expenses</a>
+</body>
+</html>
