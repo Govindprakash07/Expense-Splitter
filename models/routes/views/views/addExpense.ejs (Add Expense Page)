@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Expense</title>
+</head>
+<body>
+    <h1>Add a New Expense</h1>
+    <form action="/add" method="POST">
+        <input type="text" name="description" placeholder="Expense Description" required>
+        <input type="number" name="amount" placeholder="Total Amount" required>
+        <input type="text" name="participants" placeholder="Comma-separated names (e.g., Alice,Bob)">
+        <button type="submit">Add Expense</button>
+    </form>
+    <a href="/">⬅️ Back to Expenses</a>
+</body>
+</html>
