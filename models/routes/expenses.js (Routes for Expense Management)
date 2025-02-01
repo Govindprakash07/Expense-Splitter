@@ -1,0 +1,44 @@
+const express = require("express");
+const Expense = require("../models/Expense");
+
+const router = express.Router();
+
+// Show All Expenses
+router.get("/", async (req, res) => {
+    const expenses = await Expense.find();
+    res.render("index", { expenses });
+});
+
+// Add Expense Page
+router.get("/add", (req, res) => {
+    res.render("addExpense");
+});
+
+// Handle Adding Expense
+router.post("/add", async (req, res) => {
+    const { description, amount, participants } = req.body;
+    const newExpense = new Expense({ 
+        description, 
+        amount, 
+        participants: participants.split(",") 
+    });
+    await newExpense.save();
+    res.redirect("/");
+});
+
+// Show Summary
+router.get("/summary", async (req, res) => {
+    const expenses = await Expense.find();
+    let balances = {};
+
+    expenses.forEach(expense => {
+        const splitAmount = expense.amount / expense.participants.length;
+        expense.participants.forEach(person => {
+            balances[person] = (balances[person] || 0) - splitAmount;
+        });
+    });
+
+    res.render("summary", { balances });
+});
+
+module.exports = router;
